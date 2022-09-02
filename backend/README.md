@@ -10,7 +10,7 @@ NodeJS, ExpressJS and MongoDB (mongoose)
 
     [ ✅ ] Add vetController (register action).
 
-    [  ] Hash the password and prevent duplicate users.
+    [ ✅ ] Prevent duplicate users.
 
     [  ] Add the token and validate it.
 

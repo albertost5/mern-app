@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
+import { v4 as uuidv4 } from 'uuid';
 
 
 const vetSchema = new Schema({
@@ -27,7 +28,10 @@ const vetSchema = new Schema({
         type: String,
         default: null
     },
-    token: String,
+    token: {
+        type: String,
+        default: uuidv4()
+    },
     confirmed: {
         type: Boolean,
         default: false
