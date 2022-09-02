@@ -12,6 +12,9 @@ export default function errorResponse( code, message ) {
         case 400:
             errorResponse.title = 'BAD_REQUEST';
             break;
+        case 404:
+            errorResponse.title = 'NOT_FOUND';
+            break;
         case 500:
             errorResponse.title = 'INTERNAL_SERVER_ERROR';
             break;

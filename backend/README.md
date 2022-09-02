@@ -12,5 +12,5 @@ NodeJS, ExpressJS and MongoDB (mongoose)
 
     [ ✅ ] Prevent duplicate users.
 
-    [  ] Add the token and validate it.
+    [ ✅ ] Add token and confirm it.
 
