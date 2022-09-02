@@ -1,6 +1,8 @@
-import mongoose from 'mongoose';
-const { Schema, model } = mongoose;
 import { v4 as uuidv4 } from 'uuid';
+import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
+import errorResponse from '../utils/error.utils.js';
+const { Schema, model } = mongoose;
 
 
 const vetSchema = new Schema({
@@ -37,6 +39,19 @@ const vetSchema = new Schema({
         default: false
     }
 });
+
+vetSchema.pre('save', async function( next ) {
+    if ( !this.isModified('password') ) next();
+
+    const saltRounds = 10;
+    
+    try {
+        this.password = await bcrypt.hash(this.password, saltRounds);
+    } catch (error) {
+        throw errorResponse('40000', 'Error hashing the password.');
+    }
+});
+
 
 export default model('Vet', vetSchema);
 

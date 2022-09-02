@@ -7,7 +7,7 @@ const register = async (req, res) => {
     const { name, email, password } = req.body;
 
     if( !name || !email || !password ) {
-        return res.status(400).json( errorResponse('40000', 'All fields are required!') );
+        return res.status(400).json( errorResponse('40001', 'All fields are required!') );
     }
 
     try {
@@ -15,7 +15,7 @@ const register = async (req, res) => {
         const vet = await checkDuplicate( email );
 
         if( vet ) {
-            return res.status(400).json( errorResponse('40002', 'The user already exists.') );
+            return res.status(400).json( errorResponse('40003', 'The user already exists.') );
         } else {
             await Vet.create({ name, password, email });
             return res.json({
@@ -27,8 +27,12 @@ const register = async (req, res) => {
             });
         }
     } catch (error) {
-        if( getStatusCode( error ) === 400 ) return res.status(400).json( error );
-        return res.status(500).json( errorResponse('50000', 'Something went wrong registering the user.') );
+        console.log('¡¡¡¡¡¡¡¡ ERROR !!!!!!!! ', error);
+        if( getStatusCode( error ) === 400 ) {
+            return res.status(400).json( error )
+        } else {
+            return res.status(500).json( errorResponse('50000', 'Something went wrong registering the user.') );
+        }
     }
 }
 

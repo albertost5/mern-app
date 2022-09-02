@@ -14,3 +14,5 @@ NodeJS, ExpressJS and MongoDB (mongoose)
 
     [ ✅ ] Add token and confirm it.
 
+    [ ✅ ] Add bcrypt to hash passwords.
+

@@ -5,6 +5,6 @@ export default async function checkDuplicate( email ) {
     try {
         return await Vet.findOne({ email });
     } catch (error) {
-        throw errorResponse('40001', 'Error checking duplicate user.');
+        throw errorResponse('40002', 'Error checking duplicate user.');
     }
 }
