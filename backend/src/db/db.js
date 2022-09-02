@@ -4,15 +4,15 @@ dotenv.config();
 
 async function connectDb() {
     try {
-        const db = await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.be5hmyu.mongodb.net/?retryWrites=true&w=majority`, 
+        const db = await mongoose.connect(`${process.env.MONGODB_URI}`, 
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             }
         );
-        console.log(`DB connection established: ${db.connection.host}:${db.connection.port} 🚀`);
+        console.log(`DB connection established 🚀:  ${db.connection.host}:${db.connection.port}`);
     } catch (error) {
-        return console.log(`Error connecting the database: ${error}`);
+        console.log(`Error connecting the database ❌: ${error}`);
     }
 }
 
