@@ -16,3 +16,11 @@ NodeJS, ExpressJS and MongoDB (mongoose)
 
     [ ✅ ] Add bcrypt to hash passwords.
 
+    [ ✅ ] Add endpoint to login.
+
+    [  ] Add JWT to auth users.
+
+    [  ] Protect routes using middlewares.
+
+    [  ] Add endpoint to reset the password.
+

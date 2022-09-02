@@ -52,6 +52,10 @@ vetSchema.pre('save', async function( next ) {
     }
 });
 
+vetSchema.methods.checkPasswords = function( plainTextPassword ) {
+    return bcrypt.compareSync( plainTextPassword, this.password );
+}   
+
 
 export default model('Vet', vetSchema);
 

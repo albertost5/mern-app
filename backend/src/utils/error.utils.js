@@ -12,6 +12,9 @@ export default function errorResponse( code, message ) {
         case 400:
             errorResponse.title = 'BAD_REQUEST';
             break;
+        case 403:
+            errorResponse.title = 'FORBIDDEN';
+            break;
         case 404:
             errorResponse.title = 'NOT_FOUND';
             break;
