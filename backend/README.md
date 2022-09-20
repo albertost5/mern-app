@@ -18,9 +18,9 @@ NodeJS, ExpressJS and MongoDB (mongoose)
 
     [ ✅ ] Add endpoint to login.
 
-    [  ] Add JWT to auth users.
+    [ ✅ ] Add JWT to authenticate users.
 
-    [  ] Protect routes using middlewares.
+    [ ✅ ] Protect routes using middlewares.
 
     [  ] Add endpoint to reset the password.
 

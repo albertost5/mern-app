@@ -1,6 +1,7 @@
 import checkDuplicate from '../helpers/check-duplicate.js';
 import Vet from '../models/Vet.js';
 import errorResponse from '../utils/error.utils.js';
+import generateJWT from '../helpers/generate-jwt.js';
 
 const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -55,14 +56,14 @@ const confirmation = async (req, res) => {
     }
 }
 
-const auth = async(req, res) => {
+const auth = async (req, res) => {
     const { email, password } = req.body;
 
     try {
         // Check if the user exist by the email
         const vet = await Vet.findOne({ email });
         if (!vet) {
-            return res.status(404).json( errorResponse('40401', 'User doesnt exist.') );
+            return res.status(404).json( errorResponse('40401', 'User does not exist.') );
         }
         // Check if the user confirm the account
         if (!vet.confirmed) {
@@ -75,14 +76,25 @@ const auth = async(req, res) => {
         // Login
         res.json({
             message: `Welcome ${vet.name}!`,
+            token: generateJWT(vet.id)
         });
     } catch (error) {
         return res.status(404).json( errorResponse('40400', 'Error finding the user.') );
     }
 }
 
+const profile = (req, res) => {
+
+    const { vet } = req;
+    res.json({
+        msg: 'Visiting your profile',
+        vet
+    });
+}
+
 export {
     register,   
     auth,
-    confirmation
+    confirmation,
+    profile
 }
