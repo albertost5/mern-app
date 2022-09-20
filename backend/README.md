@@ -22,5 +22,7 @@ NodeJS, ExpressJS and MongoDB (mongoose)
 
     [ ✅ ] Protect routes using middlewares.
 
-    [  ] Add endpoint to reset the password.
+    [ ✅ ] Add endpoint to reset the password.
+
+    
 

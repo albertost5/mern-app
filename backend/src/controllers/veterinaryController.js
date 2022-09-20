@@ -2,6 +2,7 @@ import checkDuplicate from '../helpers/check-duplicate.js';
 import Vet from '../models/Vet.js';
 import errorResponse from '../utils/error.utils.js';
 import generateJWT from '../helpers/generate-jwt.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -83,6 +84,73 @@ const auth = async (req, res) => {
     }
 }
 
+const reset = async (req,res) => {
+    const { email } = req.body;
+    
+    try {
+        const vet = await Vet.findOne({ email });
+        if ( !vet ) {
+            return res.status(404).json( errorResponse('40401', 'Does not exist any user with the email provided.') );
+        }
+
+        vet.token = uuidv4();
+
+        try {
+            await vet.save();
+            return res.json({
+                message: 'We have sent an email to change with the steps to reset the password.'
+            });
+        } catch (error) {
+            return res.status(400).json( errorResponse('40000', 'There was and error reseting the password.') );
+        }
+
+    } catch (error) {
+        return res.status(404).json( errorResponse('40400', 'User not found.') );
+    }
+}
+
+const validateToken = async (req,res) => {
+    const { token } = req.params;
+
+    try {
+        const vet = await Vet.findOne({ token });
+        if ( vet ) {
+            return res.json({
+                message: 'Valid token to change the password.'
+            });
+        } else {
+            return res.status(400).json( errorResponse('40000', 'The token provided to change the password is not valid.') );
+        }
+    } catch (error) {
+        return res.status(404).json( errorResponse('40400', 'User not found.') );
+    }
+}
+
+const newPassword = async (req,res) => {
+    const { token } = req.params;
+    const { password } = req.body;
+    
+    try {
+        const vet = await Vet.findOne({ token });
+        if ( !vet ) {
+            return res.status(404).json( errorResponse('40401', 'User not found.') );
+        }
+
+        try {
+            vet.token = null;
+            vet.password = password;
+            await vet.save();
+            return res.json({
+                message: 'Password changed successfully!'
+            });
+        } catch (error) {
+            return res.status(400).json( errorResponse('40000', 'Error saving the new password.') );
+        }
+    } catch (error) {
+        return res.status(404).json( errorResponse('40400', 'User not found.') );       
+    }
+}
+
 const profile = (req, res) => {
 
     const { vet } = req;
@@ -96,5 +164,8 @@ export {
     register,   
     auth,
     confirmation,
-    profile
+    profile,
+    reset,
+    validateToken,
+    newPassword
 }
