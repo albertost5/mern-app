@@ -24,5 +24,8 @@ NodeJS, ExpressJS and MongoDB (mongoose)
 
     [ ✅ ] Add endpoint to reset the password.
 
+    [ ✅ ] Create patient model and routes.
+
+    [  ] CRUD for patients.
     
 
