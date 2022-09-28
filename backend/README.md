@@ -26,6 +26,5 @@ NodeJS, ExpressJS and MongoDB (mongoose)
 
     [ ✅ ] Create patient model and routes.
 
-    [  ] CRUD for patients.
     
 

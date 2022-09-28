@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import Vet from '../models/Vet.js';
 import errorResponse from '../utils/error.utils.js';
 
-const validateJWT = async (req, res, next) => {
+const checkAuth = async (req, res, next) => {
     let token;
     if( req.headers.authorization ) {
         try {
@@ -25,4 +25,4 @@ const validateJWT = async (req, res, next) => {
     }
 }
 
-export default validateJWT;
+export default checkAuth;
