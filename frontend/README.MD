@@ -6,7 +6,7 @@ React
 
 ## Features
 
-    [ ] To do!!
+    [ ✅ ] Add Tailwindcss and first pages.
 
-    
+    [  ] To do!! 
 
