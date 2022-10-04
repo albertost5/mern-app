@@ -8,5 +8,12 @@ React
 
     [ ✅ ] Add Tailwindcss and first pages.
 
-    [  ] To do!! 
+    [ ✅ ] Add elements to login, register and forget my password pages.
 
+    [  ] Add register's form validation.
+    
+    [  ] Add account confirmation.
+
+    [  ] Add reset password.
+
+    [  ] Add user's authentication.
