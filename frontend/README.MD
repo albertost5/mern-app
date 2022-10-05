@@ -10,7 +10,7 @@ React
 
     [ ✅ ] Add elements to login, register and forget my password pages.
 
-    [  ] Add register's form validation.
+    [  ] Add register's form validation, state..
     
     [  ] Add account confirmation.
 

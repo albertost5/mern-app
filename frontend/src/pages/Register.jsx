@@ -1,6 +1,40 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import Alert from '../components/Alert'
 
 const Register = () => {
+
+  const [name, setName ] = useState('')
+  const [email, setEmail ] = useState('')
+  const [password, setPassword ] = useState('')
+  const [repeatPassword, setRepeatPassword ] = useState('')
+
+  const [alert, setAlert] = useState({})
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    
+    if ( [name, email, password, repeatPassword].includes('') ) {
+      setAlert( { message: 'There are empty fields.', error: true} )
+      return
+    }
+
+    if ( password !== repeatPassword ) {
+      setAlert( { message: 'Passwords do not match.', error: true} )
+      return
+    }
+
+    if ( password.length < 6 ) {
+      setAlert( { message: 'The min password length are 6 chars.', error: true} )
+      return
+    }
+
+    console.log('OK')
+    setAlert({})
+  }
+
+  const { message } = alert
+
   return (
     <>
 
@@ -10,7 +44,11 @@ const Register = () => {
 
       <div className='mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white'>
 
-        <form>
+        { message && <Alert alert={alert} /> }
+
+        <form
+          onSubmit={handleSubmit}
+        >
           <div className="my-5">
             <label className="uppercase text-gray-600 block text-xl font-bold">
               Name
@@ -18,6 +56,8 @@ const Register = () => {
             <input
               type="text" placeholder="Insert your name.."
               className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+              value={name}
+              onChange={ e => setName(e.target.value) }
             />
           </div>
           <div className="my-5">
@@ -27,6 +67,8 @@ const Register = () => {
             <input
               type="email" placeholder="Insert your email.."
               className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+              value={email}
+              onChange={ e => setEmail(e.target.value) }
             />
           </div>
           <div className="my-5">
@@ -36,6 +78,8 @@ const Register = () => {
             <input
               type="password" placeholder="Insert your password.."
               className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+              value={password}
+              onChange={ e => setPassword(e.target.value) }
             />
           </div>
           <div className="my-5">
@@ -45,6 +89,8 @@ const Register = () => {
             <input
               type="password" placeholder="Repeat your password.."
               className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+              value={repeatPassword}
+              onChange={ e => setRepeatPassword(e.target.value) }
             />
           </div>
 
