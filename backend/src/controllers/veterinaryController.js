@@ -1,8 +1,9 @@
-import checkDuplicate from '../helpers/check-duplicate.js';
+import { v4 as uuidv4 } from 'uuid';
 import Vet from '../models/Vet.js';
+import checkDuplicate from '../helpers/check-duplicate.js';
 import errorResponse from '../utils/error.utils.js';
 import generateJWT from '../helpers/generate-jwt.js';
-import { v4 as uuidv4 } from 'uuid';
+import emailRegister from '../helpers/email-register.js';
 
 const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -18,7 +19,15 @@ const register = async (req, res) => {
         if (vet) {
             return res.status(400).json( errorResponse('40003', 'The user already exists.') );
         } else {
-            await Vet.create({ name, password, email });
+            const vetCreated = await Vet.create({ name, password, email });
+
+            // Send email after create the Veterinary
+            await emailRegister({
+                email,
+                name,
+                token: vetCreated.token
+            });
+
             return res.json({
                 message: `Register completed successfully!`,
                 vet: {
@@ -28,6 +37,7 @@ const register = async (req, res) => {
             });
         }
     } catch (error) {
+        console.log('Error registering new user:', error);
         if (error?.code) {
             return res.status(400).json( error );
         } else {
