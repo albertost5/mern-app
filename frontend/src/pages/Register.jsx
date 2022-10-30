@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Alert from '../components/Alert'
+import axios from 'axios'
 
 const Register = () => {
 
@@ -11,7 +12,7 @@ const Register = () => {
 
   const [alert, setAlert] = useState({})
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     
     if ( [name, email, password, repeatPassword].includes('') ) {
@@ -29,8 +30,24 @@ const Register = () => {
       return
     }
 
-    console.log('OK')
+    // All set
     setAlert({})
+
+    // Create user
+    try {
+      const registerUrl = 'http://localhost:3000/api/vets/'
+      const data = {
+        name,
+        email,
+        password
+      }
+      await axios.post(registerUrl, data)
+      // console.log('response.data => ', response.data)
+      setAlert({ message: 'Account created, check your email!', error: false })
+    } catch (error) {
+      console.log(error.response.data.message);
+      setAlert({ message: error.response.data.message, error: true })
+    }
   }
 
   const { message } = alert
