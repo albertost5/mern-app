@@ -10,7 +10,7 @@ const app = express();
 // DB
 await connectDb();
 
-const whiteList = ['http://localhost:4000'];
+const whiteList = [process.env.FRONTEND_BASEPATH];
 
 const corsOptions = {
     origin: function(origin, callback) {

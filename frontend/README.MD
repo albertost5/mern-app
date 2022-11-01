@@ -12,7 +12,7 @@ React
 
     [ ✅ ] Add register's form validation, state..
     
-    [  ] Add account confirmation.
+    [ ✅ ] Add account confirmation step (useEffect).
 
     [  ] Add reset password.
 

@@ -52,7 +52,7 @@ const confirmation = async (req, res) => {
     try {
         const vet = await Vet.findOneAndUpdate({ token }, { $set: { confirmed: true, token: null } }, { new: true});
         
-        if(!vet) return res.status(404).json( errorResponse('40400', 'User not found.') );
+        if(!vet) return res.status(404).json( errorResponse('40400', 'User not found or token not valid.') );
         
         return res.json({
             message: 'Account confirmed successfully.',
