@@ -4,6 +4,7 @@ import checkDuplicate from '../helpers/check-duplicate.js';
 import errorResponse from '../utils/error.utils.js';
 import generateJWT from '../helpers/generate-jwt.js';
 import emailRegister from '../helpers/email-register.js';
+import emailPassword from '../helpers/email-password.js';
 
 const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -103,12 +104,17 @@ const reset = async (req,res) => {
             return res.status(404).json( errorResponse('40401', 'Does not exist any user with the email provided.') );
         }
 
+        // Set new token to reset the password /reset-password/:token endpoint
         vet.token = uuidv4();
 
         try {
             await vet.save();
+
+            // Send email redirecting the user to the component to set the new password
+            emailPassword(vet);
+
             return res.json({
-                message: 'We have sent an email to change with the steps to reset the password.'
+                message: 'We have sent an email with the steps to reset the password.'
             });
         } catch (error) {
             return res.status(400).json( errorResponse('40000', 'There was and error reseting the password.') );

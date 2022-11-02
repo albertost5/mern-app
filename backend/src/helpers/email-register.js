@@ -1,18 +1,8 @@
-import nodemailer from "nodemailer";
+import transporter from '../config/transporter.js';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
 const emailRegister = async (vetObject) => {
-
-    // Create reusable transporter object using the default SMTP transport
-    let transporter  = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
-    });
 
     const {email, name, token} = vetObject;
 
@@ -31,7 +21,7 @@ const emailRegister = async (vetObject) => {
                 <p>If you didn't create this account you can ignore this message.</p>
             `, // html body
         });
-        console.log('Email sent: %s', info.messageId);
+        console.log('Email sent @ registration: %s', info.messageId);
     } catch (error) {
         throw errorResponse('40004', 'Error sending confirmation email.');
     }
