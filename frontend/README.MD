@@ -13,7 +13,9 @@ React
     [ ✅ ] Add register's form validation, state..
     
     [ ✅ ] Add account confirmation step (useEffect).
+ 
+    [ ✅ ] Add reset password page.
 
-    [  ] Add reset password.
+    [ ✅ ] Add endpoint and page for new password.
 
     [  ] Add user's authentication.
