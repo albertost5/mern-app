@@ -18,4 +18,4 @@ React
 
     [ ✅ ] Add endpoint and page for new password.
 
-    [  ] Add user's authentication.
+    [  ] Add context and user's authentication.

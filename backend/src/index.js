@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 // DB
-await connectDb();
+connectDb();
 
 const whiteList = [process.env.FRONTEND_BASEPATH];
 

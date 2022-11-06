@@ -83,7 +83,7 @@ const auth = async (req, res) => {
         }
         // Check if the passwords match
         if (!vet.checkPasswords(password)) {
-            return res.status(403).json( errorResponse('40301', 'Passwords do not match.') );
+            return res.status(403).json( errorResponse('40301', 'Incorrect password.') );
         } 
         // Login
         res.json({
@@ -168,12 +168,8 @@ const newPassword = async (req,res) => {
 }
 
 const profile = (req, res) => {
-
     const { vet } = req;
-    res.json({
-        msg: 'Visiting your profile',
-        vet
-    });
+    res.json(vet);
 }
 
 export {
