@@ -6,7 +6,7 @@ import axiosClient from '../config/axios'
 const ForgetPassword = () => {
 
   const [ email, setEmail ] = useState('')
-  const [alert, setAlert] = useState({})
+  const [ alert, setAlert ] = useState({})
 
   const handleSubmit = async (e) => {
     e.preventDefault()

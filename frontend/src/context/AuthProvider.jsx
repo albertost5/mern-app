@@ -7,18 +7,22 @@ const AuthContext = createContext()
 const AuthProvider = ({ children }) => {
 
     const [ auth, setAuth ] = useState({})
+    const [ loading, setLoading ] = useState(true);
     
     useEffect( () => {
         const userAuth =  async () => {
             const token = localStorage.getItem('token')
             console.log('AUTH TOKEN: ', token)
-            if ( !token ) return
+            if ( !token ) {
+                setLoading(false)
+                return
+            }
 
             const config = {
                 headers: {
                     "Contet-Type": "application/json",
                     Authorization: `Bearer ${token}`
-                 }
+                }
             }
 
             try {
@@ -30,6 +34,7 @@ const AuthProvider = ({ children }) => {
                 setAuth({})
             }
 
+            setLoading(false)
         }
 
         userAuth()
@@ -38,7 +43,8 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={{
             auth,
-            setAuth
+            setAuth,
+            loading
         }}>
             {children}
         </AuthContext.Provider>

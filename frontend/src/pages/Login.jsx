@@ -32,7 +32,7 @@ const Login = () => {
       const { data } = await axiosClient.post('/vets/login', { email, password })
       localStorage.setItem('token', data.token)
 
-      // redirect the user after login
+      // Redirect the user after the login
       navigate('/admin')
     } catch (error) {
       setAlert({

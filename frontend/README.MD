@@ -18,4 +18,6 @@ React
 
     [ ✅ ] Add endpoint and page for new password.
 
-    [  ] Add context and user's authentication.
+    [ ✅ ] Add context and user's authentication.
+
+    [  ] Add protected route layout, header and footer.

@@ -16,7 +16,7 @@ const ConfirmAccount = () => {
 
     const confirmAccount = async () => {
       try {
-        const url = `${import.meta.env.VITE_BACKEND_BASEPATH}/api/vets/confirm/${id}`
+        const url = `vets/confirm/${id}`
         const { data } = await axiosClient(url)
         setAccConfirmed(true)
         setAlert({
