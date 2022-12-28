@@ -85,9 +85,12 @@ const auth = async (req, res) => {
         if (!vet.checkPasswords(password)) {
             return res.status(403).json( errorResponse('40301', 'Incorrect password.') );
         } 
+     
         // Login
         res.json({
-            message: `Welcome ${vet.name}!`,
+            _id: vet.id,
+            name: vet.name,
+            email: vet.email,
             token: generateJWT(vet.id)
         });
     } catch (error) {

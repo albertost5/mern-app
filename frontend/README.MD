@@ -20,4 +20,6 @@ React
 
     [ ✅ ] Add context and user's authentication.
 
-    [  ] Add protected route layout, header and footer.
+    [ ✅ ] Add protected route layout, header and footer.
+
+    [ ✅ ] Add log out.

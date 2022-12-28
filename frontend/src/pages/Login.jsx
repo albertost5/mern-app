@@ -11,6 +11,8 @@ const Login = () => {
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
   const [ alert, setAlert ] = useState({})
+
+  const { setAuth } = useAuth()
   
   const navigate = useNavigate()
 
@@ -31,7 +33,8 @@ const Login = () => {
       // response => { message, token }
       const { data } = await axiosClient.post('/vets/login', { email, password })
       localStorage.setItem('token', data.token)
-
+      console.log('Data: ', data)
+      setAuth(data)
       // Redirect the user after the login
       navigate('/admin')
     } catch (error) {
