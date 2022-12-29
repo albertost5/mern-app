@@ -41,7 +41,6 @@ const Register = () => {
         password
       }
       await axiosClient.post('/vets', data)
-      // console.log('response.data => ', response.data)
       setAlert({ message: 'Account created, check your email!', error: false })
     } catch (error) {
       console.log(error.response.data.message);

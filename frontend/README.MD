@@ -23,3 +23,5 @@ React
     [ ✅ ] Add protected route layout, header and footer.
 
     [ ✅ ] Add log out.
+
+    [  ] Add patients area (Add new patient, list all patients etc..).

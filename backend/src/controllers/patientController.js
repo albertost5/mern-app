@@ -15,9 +15,7 @@ const addPatient = async (req, res) => {
         patient.vet = req.vet.id;
         patient.save();
 
-        res.json({
-            message: 'New patient added!'
-        });
+        res.json(patient);
     } catch (error) {
         return res.status(400).json( errorResponse('40000', 'There was a problem adding the patient.') );
     }
