@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Alert from "./Alert"
 import usePatients from "../hooks/usePatients"
 
@@ -9,10 +9,22 @@ const Form = () => {
     const [email, setEamil] = useState('')
     const [date, setDate] = useState('')
     const [description, setDescription] = useState('')
+    const [id, setId] = useState(null)
 
     const [alert, setAlert] = useState({})
 
-    const { patients, savePatient } = usePatients()
+    const { patients, savePatient, patient } = usePatients()
+
+    useEffect(() => {
+        if ( patient?.name ) {
+            setName(patient.name)
+            setOwner(patient.owner)
+            setEamil(patient.email)
+            setDate(patient.date)
+            setDescription(patient.description)
+            setId(patient._id)
+        }
+    }, [patient])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -24,14 +36,31 @@ const Form = () => {
             })
         }
         
-        setAlert({})
         savePatient({
             name,
             owner,
             email,
             date,
-            description
+            description,
+            id
         })
+
+        setAlert({
+            message: 'Saved correctly!',
+            error: false
+        })
+
+        setTimeout(() => {
+            setAlert({})
+        }, 1500);
+
+        // Clean form
+        setName('')
+        setOwner('')
+        setEamil('')
+        setDate('')
+        setId('')
+        setDescription('')
     }
 
     const { message } = alert;
@@ -115,7 +144,7 @@ const Form = () => {
                 </div>
                 <input
                     type="submit"
-                    value="Add Patient"
+                    value={id ? 'Edit Patient' : 'Add Patient'}
                     className="bg-indigo-600 w-full p-3 text-white font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
                 />
             </form>

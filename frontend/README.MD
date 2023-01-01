@@ -24,4 +24,4 @@ React
 
     [ ✅ ] Add log out.
 
-    [  ] Add patients area (CRUD for patients..).
+    [ ✅ ] Add patients area (CRUD for patients..).
