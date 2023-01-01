@@ -8,6 +8,30 @@ export const PatientsProvider = ({children}) => {
 
     const [patients, setPatients] = useState([])
 
+    useEffect(() => {
+        
+        const findAllPatients = async() => {
+            const token = localStorage.getItem('token')
+            if ( !token ) return
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            try {
+                const { data } = await axiosClient.get('/patients', config)
+                setPatients(data)
+            } catch (error) {
+                console.log('Error finding all patients: ', error)
+            }
+        }
+
+        findAllPatients();
+    }, [])
+
+
     const savePatient = async(patient) => {
         const token = localStorage.getItem('token')
         const config = {

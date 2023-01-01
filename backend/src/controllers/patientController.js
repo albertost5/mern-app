@@ -27,9 +27,7 @@ const getPatients = async (req, res) => {
         // const patients = await Patient.find().where('vet').equals(req.vet.id);
         if( !patients ) return res.status(404).json('40400', 'Patients not found.');
 
-        return res.json({
-            patients
-        });
+        return res.json(patients);
     } catch (error) {
         return res.status(400).json( errorResponse('40000', 'There was a problem getting all the patients.') );
     }
