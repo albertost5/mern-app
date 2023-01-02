@@ -25,3 +25,5 @@ React
     [ ✅ ] Add log out.
 
     [ ✅ ] Add patients area (CRUD for patients..).
+
+    [ ✅ ] Add edit profile and change password area (add 2 pages and navbar component).
