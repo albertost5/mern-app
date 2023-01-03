@@ -22,9 +22,13 @@ NodeJS, ExpressJS and MongoDB (mongoose)
 
     [ ✅ ] Protect routes using middlewares.
 
-    [ ✅ ] Add endpoint to reset the password.
+    [ ✅ ] Add endpoint to reset the password (public area).
 
     [ ✅ ] Create patient model and routes.
+
+    [ ✅ ] Add endpoint to change the profile data.
+
+    [ ✅ ] Add endpoint to change the user password.
 
     
 

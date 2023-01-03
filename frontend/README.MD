@@ -30,4 +30,4 @@ React
 
     [ ✅ ] Add a form to edit profile (useEffect, plus updating the auth provider and the backend route to be able to do it).
 
-    [    ] Add a form to change the password
+    [ ✅ ] Add new form to change the password, add the logic to control the state and modify the auth context to communicate with the API.

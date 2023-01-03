@@ -1,5 +1,5 @@
 import express from 'express';
-import { register, confirmation, auth, profile, reset, validateToken, newPassword, updateProfile } from '../controllers/veterinaryController.js';
+import { register, confirmation, auth, profile, reset, validateToken, newPassword, updateProfile, updatePassword } from '../controllers/veterinaryController.js';
 import checkAuth from '../middlewares/checkAuth.js';
 
 const router = express.Router();
@@ -14,6 +14,7 @@ router.route('/reset-password/:token')
 
 router.get('/profile', checkAuth, profile);
 router.put('/profile/:id', checkAuth, updateProfile)
+router.put('/update-password', checkAuth, updatePassword)
 
 export default router;
 

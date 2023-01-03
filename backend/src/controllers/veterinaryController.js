@@ -182,7 +182,7 @@ const updateProfile = async(req, res) => {
     if ( vet.email !== body.email ) {
         const emailSaved = await Vet.findOne({ email: body.email });
         if ( emailSaved ) {
-            return res.status(400).json( errorResponse('40000', 'The email is already in use.') )
+            return res.status(400).json( errorResponse('40001', 'The email is already in use.') )
         }
     }
     try {
@@ -193,7 +193,31 @@ const updateProfile = async(req, res) => {
         const vetUpdated = await vet.save();
         return res.json(vetUpdated);
     } catch (error) {
-        return res.status(400).json( errorResponse('40001', 'There was an error updating the vet.') );
+        return res.status(400).json( errorResponse('40000', 'There was an error updating the vet.') );
+    }
+}
+
+const updatePassword = async(req, res) => {
+    const { id } = req.vet;
+    const { current_password, new_password } = req.body
+
+    // Check vet exist
+    const vet = await Vet.findById(id);
+    if ( !vet ) return res.status(404).json( errorResponse('40400', 'User not found.') );
+
+    // Check password
+    if ( vet.checkPasswords(current_password) ) {
+        vet.password = new_password;
+        try {
+            await vet.save();
+            return res.json({
+                message: 'Password saved successfully!'
+            });
+        } catch (error) {
+            return res.status(400).json( errorResponse('40001', 'There was a problem updating the new password.') );
+        }
+    } else {
+        return res.status(400).json( errorResponse('40000', 'The current password is incorrect.') );
     }
 }
 
@@ -205,5 +229,6 @@ export {
     reset,
     validateToken,
     newPassword, 
-    updateProfile
+    updateProfile,
+    updatePassword
 }

@@ -73,13 +73,41 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    const savePassword = async(passwords) => {
+        const token = localStorage.getItem('token')
+        if ( !token ) {
+            setLoading(false)
+            return
+        }
+        const config = {
+            headers: {
+                "Contet-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const url = '/vets/update-password'
+            const {data} = await axiosClient.put(url, passwords, config)
+            return {
+                message: data.message
+            }
+        } catch (error) {
+            return {
+                message: error.response.data.message,
+                error: true
+            }
+        }
+    }
+
     return (
         <AuthContext.Provider value={{
             auth,
             setAuth,
             loading,
             logOut,
-            updateProfile
+            updateProfile,
+            savePassword
         }}>
             {children}
         </AuthContext.Provider>
