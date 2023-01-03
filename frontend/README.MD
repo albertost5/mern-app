@@ -27,3 +27,7 @@ React
     [ ✅ ] Add patients area (CRUD for patients..).
 
     [ ✅ ] Add edit profile and change password area (add 2 pages and navbar component).
+
+    [ ✅ ] Add a form to edit profile (useEffect, plus updating the auth provider and the backend route to be able to do it).
+
+    [    ] Add a form to change the password

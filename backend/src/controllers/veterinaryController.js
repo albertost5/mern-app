@@ -175,6 +175,28 @@ const profile = (req, res) => {
     res.json(vet);
 }
 
+const updateProfile = async(req, res) => {
+    const { body } = req;
+    const vet = await Vet.findById(req.params.id);
+    if ( !vet ) return res.status(404).json( errorResponse('40400', 'User not found.') );
+    if ( vet.email !== body.email ) {
+        const emailSaved = await Vet.findOne({ email: body.email });
+        if ( emailSaved ) {
+            return res.status(400).json( errorResponse('40000', 'The email is already in use.') )
+        }
+    }
+    try {
+        vet.name = body.name;
+        vet.web = body.web;
+        vet.email = body.email;
+        vet.phone = body.phone;
+        const vetUpdated = await vet.save();
+        return res.json(vetUpdated);
+    } catch (error) {
+        return res.status(400).json( errorResponse('40001', 'There was an error updating the vet.') );
+    }
+}
+
 export {
     register,   
     auth,
@@ -182,5 +204,6 @@ export {
     profile,
     reset,
     validateToken,
-    newPassword
+    newPassword, 
+    updateProfile
 }

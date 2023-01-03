@@ -45,12 +45,41 @@ const AuthProvider = ({ children }) => {
         setAuth({})
     }
 
+    const updateProfile = async( profileData ) => {
+        const token = localStorage.getItem('token')
+        if ( !token ) {
+            setLoading(false)
+            return
+        }
+        const config = {
+            headers: {
+                "Contet-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const url = `/vets/profile/${profileData._id}`
+            const { data } = await axiosClient.put(url, profileData, config)
+            return {
+                message: 'Data saved correctly!',
+                error: false
+            }
+        } catch (error) {
+            return {
+                message: 'The email is already in use.',
+                error: true
+            }
+        }
+    }
+
     return (
         <AuthContext.Provider value={{
             auth,
             setAuth,
             loading,
-            logOut
+            logOut,
+            updateProfile
         }}>
             {children}
         </AuthContext.Provider>
